@@ -1,11 +1,16 @@
 # Playwright Testing - Saucedemo
 
+[![Playwright Tests](https://github.com/USERNAME/REPOSITORY/actions/workflows/playwright.yml/badge.svg)](https://github.com/USERNAME/REPOSITORY/actions/workflows/playwright.yml)
+
 Project **E2E Testing** menggunakan **Playwright** untuk website [Saucedemo](https://www.saucedemo.com).
 
 ## 📁 Struktur Project
 
 ```
 D:\Playwright\
+├── .github/
+│   └── workflows/
+│       └── playwright.yml      # CI/CD GitHub Actions Pipeline
 ├── playwright.config.js        # Konfigurasi Playwright
 ├── package.json                # Dependencies & scripts
 ├── tests/
@@ -123,3 +128,9 @@ npm run report
 - ✅ Firefox
 - ✅ WebKit (Safari)
 - ✅ Mobile Chrome (Pixel 5)
+
+## ⚙️ CI/CD Pipeline (GitHub Actions)
+Project ini dilengkapi dengan **GitHub Actions Workflow** (`.github/workflows/playwright.yml`).
+- **Otomatisasi**: Dijalankan secara otomatis setiap kali ada `push` atau `pull_request` ke branch `main`/`master`.
+- **Artifacts**: Mengunggah *Playwright HTML Report* secara otomatis setelah eksekusi selesai yang dapat diunduh dari tab **Actions** di GitHub.
+
