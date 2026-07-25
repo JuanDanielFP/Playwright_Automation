@@ -1,0 +1,29 @@
+{
+  "name": "playwright-saucedemo-testing",
+  "version": "1.0.0",
+  "description": "Playwright E2E Testing untuk Saucedemo - mencakup Login, Inventory, Cart, dan Checkout",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome'",
+    "test:login": "playwright test tests/login.test.js",
+    "test:inventory": "playwright test tests/inventory.test.js",
+    "test:cart": "playwright test tests/cart.test.js",
+    "test:checkout": "playwright test tests/checkout.test.js",
+    "test:e2e": "playwright test tests/e2e.test.js",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "install:browsers": "playwright install"
+  },
+  "keywords": ["playwright", "testing", "e2e", "saucedemo", "automation"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
