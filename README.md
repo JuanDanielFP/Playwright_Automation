@@ -1,6 +1,6 @@
 # Playwright Testing - Saucedemo
 
-[![Playwright Tests](https://github.com/USERNAME/REPOSITORY/actions/workflows/playwright.yml/badge.svg)](https://github.com/USERNAME/REPOSITORY/actions/workflows/playwright.yml)
+[![Playwright Tests](https://github.com/JuanDanielFP/Playwright_Automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/JuanDanielFP/Playwright_Automation/actions/workflows/playwright.yml)
 
 Project **E2E Testing** menggunakan **Playwright** untuk website [Saucedemo](https://www.saucedemo.com).
 
