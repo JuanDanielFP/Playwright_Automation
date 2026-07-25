@@ -1,24 +1,14 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage, InventoryPage, CartPage, CheckoutPage } = require('./pages/saucedemo.pages');
+const { test, expect } = require('./fixtures/test.fixture');
 const { USERS, CHECKOUT_INFO } = require('./data/test-data');
 const { takeScreenshot } = require('./helpers/screenshot.helper');
 
 const SUITE = 'checkout';
 
 test.describe('💳 Checkout Tests - Saucedemo', () => {
-  let inventoryPage;
-  let cartPage;
-  let checkoutPage;
-
-  test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
+  test.beforeEach(async ({ page, loginPage, inventoryPage, cartPage }) => {
     await loginPage.goto();
     await loginPage.login(USERS.STANDARD.username, USERS.STANDARD.password);
     await page.waitForURL(/.*inventory/);
-
-    inventoryPage = new InventoryPage(page);
-    cartPage = new CartPage(page);
-    checkoutPage = new CheckoutPage(page);
 
     await inventoryPage.addFirstItemToCart();
     await inventoryPage.goToCart();
@@ -26,7 +16,7 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await page.waitForURL(/.*checkout-step-one/);
   });
 
-  test('TC-CO-01: Checkout berhasil dengan informasi valid', async ({ page }) => {
+  test('TC-CO-01: Checkout berhasil dengan informasi valid', async ({ page, checkoutPage }) => {
     await takeScreenshot(page, SUITE, 'TC-CO-01', '01_halaman-checkout-step1');
     await checkoutPage.fillInfo(
       CHECKOUT_INFO.VALID.firstName,
@@ -39,7 +29,7 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-CO-01', '03_checkout-step2-overview');
   });
 
-  test('TC-CO-02: Checkout gagal tanpa First Name', async ({ page }) => {
+  test('TC-CO-02: Checkout gagal tanpa First Name', async ({ page, checkoutPage }) => {
     await takeScreenshot(page, SUITE, 'TC-CO-02', '01_form-tanpa-firstname');
     await checkoutPage.fillInfo('', CHECKOUT_INFO.VALID.lastName, CHECKOUT_INFO.VALID.postalCode);
     await checkoutPage.continue();
@@ -48,7 +38,7 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-CO-02', '02_error-firstname-kosong');
   });
 
-  test('TC-CO-03: Checkout gagal tanpa Last Name', async ({ page }) => {
+  test('TC-CO-03: Checkout gagal tanpa Last Name', async ({ page, checkoutPage }) => {
     await takeScreenshot(page, SUITE, 'TC-CO-03', '01_form-tanpa-lastname');
     await checkoutPage.fillInfo(CHECKOUT_INFO.VALID.firstName, '', CHECKOUT_INFO.VALID.postalCode);
     await checkoutPage.continue();
@@ -57,7 +47,7 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-CO-03', '02_error-lastname-kosong');
   });
 
-  test('TC-CO-04: Checkout gagal tanpa Postal Code', async ({ page }) => {
+  test('TC-CO-04: Checkout gagal tanpa Postal Code', async ({ page, checkoutPage }) => {
     await takeScreenshot(page, SUITE, 'TC-CO-04', '01_form-tanpa-postalcode');
     await checkoutPage.fillInfo(CHECKOUT_INFO.VALID.firstName, CHECKOUT_INFO.VALID.lastName, '');
     await checkoutPage.continue();
@@ -66,7 +56,7 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-CO-04', '02_error-postalcode-kosong');
   });
 
-  test('TC-CO-05: Verifikasi ringkasan order di step 2', async ({ page }) => {
+  test('TC-CO-05: Verifikasi ringkasan order di step 2', async ({ page, checkoutPage }) => {
     await checkoutPage.fillInfo(
       CHECKOUT_INFO.VALID.firstName,
       CHECKOUT_INFO.VALID.lastName,
@@ -80,7 +70,7 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-CO-05', '01_ringkasan-order-step2');
   });
 
-  test('TC-CO-06: Checkout selesai menampilkan halaman sukses', async ({ page }) => {
+  test('TC-CO-06: Checkout selesai menampilkan halaman sukses', async ({ page, checkoutPage }) => {
     await checkoutPage.fillInfo(
       CHECKOUT_INFO.VALID.firstName,
       CHECKOUT_INFO.VALID.lastName,
@@ -96,14 +86,14 @@ test.describe('💳 Checkout Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-CO-06', '02_checkout-complete-sukses');
   });
 
-  test('TC-CO-07: Tombol Cancel di step 1 kembali ke cart', async ({ page }) => {
+  test('TC-CO-07: Tombol Cancel di step 1 kembali ke cart', async ({ page, checkoutPage }) => {
     await takeScreenshot(page, SUITE, 'TC-CO-07', '01_halaman-checkout-step1');
     await checkoutPage.cancelButton.click();
     await expect(page).toHaveURL(/.*cart/);
     await takeScreenshot(page, SUITE, 'TC-CO-07', '02_kembali-ke-cart');
   });
 
-  test('TC-CO-08: Verifikasi tax dan total di order summary', async ({ page }) => {
+  test('TC-CO-08: Verifikasi tax dan total di order summary', async ({ page, checkoutPage }) => {
     await checkoutPage.fillInfo(
       CHECKOUT_INFO.VALID.firstName,
       CHECKOUT_INFO.VALID.lastName,

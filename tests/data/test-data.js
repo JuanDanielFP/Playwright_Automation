@@ -1,23 +1,25 @@
 /**
  * Test data constants untuk Saucedemo
+ * Mendukung pembacaan dari environment variables (.env) dengan fallback default.
  */
+require('dotenv').config();
 
 const USERS = {
   STANDARD: {
-    username: 'standard_user',
-    password: 'secret_sauce',
+    username: process.env.STANDARD_USER || 'standard_user',
+    password: process.env.STANDARD_PASSWORD || 'secret_sauce',
   },
   LOCKED_OUT: {
-    username: 'locked_out_user',
-    password: 'secret_sauce',
+    username: process.env.LOCKED_OUT_USER || 'locked_out_user',
+    password: process.env.STANDARD_PASSWORD || 'secret_sauce',
   },
   PROBLEM: {
-    username: 'problem_user',
-    password: 'secret_sauce',
+    username: process.env.PROBLEM_USER || 'problem_user',
+    password: process.env.STANDARD_PASSWORD || 'secret_sauce',
   },
   PERFORMANCE_GLITCH: {
-    username: 'performance_glitch_user',
-    password: 'secret_sauce',
+    username: process.env.PERFORMANCE_GLITCH_USER || 'performance_glitch_user',
+    password: process.env.STANDARD_PASSWORD || 'secret_sauce',
   },
   INVALID: {
     username: 'invalid_user',
@@ -26,7 +28,7 @@ const USERS = {
 };
 
 const URLS = {
-  BASE: 'https://www.saucedemo.com',
+  BASE: process.env.BASE_URL || 'https://www.saucedemo.com',
   INVENTORY: '/inventory.html',
   CART: '/cart.html',
   CHECKOUT_STEP_ONE: '/checkout-step-one.html',

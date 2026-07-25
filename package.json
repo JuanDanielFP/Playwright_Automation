@@ -20,10 +20,17 @@
     "report": "playwright show-report",
     "install:browsers": "playwright install"
   },
-  "keywords": ["playwright", "testing", "e2e", "saucedemo", "automation"],
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "saucedemo",
+    "automation"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.40.0",
+    "dotenv": "^17.4.2"
   }
 }

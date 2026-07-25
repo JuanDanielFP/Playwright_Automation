@@ -11,13 +11,18 @@ D:\Playwright\
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml      # CI/CD GitHub Actions Pipeline
-├── playwright.config.js        # Konfigurasi Playwright
+├── .env                        # Environment Variables (Git-ignored)
+├── .env.example                # Template Environment Variables
+├── playwright.config.js        # Konfigurasi Playwright & Setup Dependencies
 ├── package.json                # Dependencies & scripts
 ├── tests/
+│   ├── auth.setup.js           # Pre-authentication Setup (storageState)
+│   ├── fixtures/
+│   │   └── test.fixture.js     # Custom Playwright Fixtures (Dependency Injection)
 │   ├── pages/
 │   │   └── saucedemo.pages.js  # Page Object Model (POM)
 │   ├── data/
-│   │   └── test-data.js        # Test data & constants
+│   │   └── test-data.js        # Test data & environment loader
 │   ├── login.test.js           # Test Login (7 TC)
 │   ├── inventory.test.js       # Test Inventory (10 TC)
 │   ├── cart.test.js            # Test Cart (7 TC)

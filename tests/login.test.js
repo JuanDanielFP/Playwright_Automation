@@ -1,19 +1,15 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('./pages/saucedemo.pages');
+const { test, expect } = require('./fixtures/test.fixture');
 const { USERS } = require('./data/test-data');
 const { takeScreenshot } = require('./helpers/screenshot.helper');
 
 const SUITE = 'login';
 
 test.describe('🔐 Login Tests - Saucedemo', () => {
-  let loginPage;
-
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
+  test.beforeEach(async ({ loginPage }) => {
     await loginPage.goto();
   });
 
-  test('TC-LOGIN-01: Login berhasil dengan standard_user', async ({ page }) => {
+  test('TC-LOGIN-01: Login berhasil dengan standard_user', async ({ page, loginPage }) => {
     // Step 1: Tampilan halaman login
     await takeScreenshot(page, SUITE, 'TC-LOGIN-01', '01_halaman-login');
 
@@ -25,7 +21,7 @@ test.describe('🔐 Login Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-01', '02_login-sukses-inventory');
   });
 
-  test('TC-LOGIN-02: Login gagal dengan user yang di-lock', async ({ page }) => {
+  test('TC-LOGIN-02: Login gagal dengan user yang di-lock', async ({ page, loginPage }) => {
     // Step 1: Halaman login
     await takeScreenshot(page, SUITE, 'TC-LOGIN-02', '01_halaman-login');
 
@@ -38,7 +34,7 @@ test.describe('🔐 Login Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-02', '02_error-user-locked');
   });
 
-  test('TC-LOGIN-03: Login gagal dengan kredensial tidak valid', async ({ page }) => {
+  test('TC-LOGIN-03: Login gagal dengan kredensial tidak valid', async ({ page, loginPage }) => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-03', '01_halaman-login');
 
     await loginPage.login(USERS.INVALID.username, USERS.INVALID.password);
@@ -48,7 +44,7 @@ test.describe('🔐 Login Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-03', '02_error-kredensial-invalid');
   });
 
-  test('TC-LOGIN-04: Login gagal tanpa username', async ({ page }) => {
+  test('TC-LOGIN-04: Login gagal tanpa username', async ({ page, loginPage }) => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-04', '01_halaman-login');
 
     await loginPage.login('', USERS.STANDARD.password);
@@ -58,7 +54,7 @@ test.describe('🔐 Login Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-04', '02_error-username-kosong');
   });
 
-  test('TC-LOGIN-05: Login gagal tanpa password', async ({ page }) => {
+  test('TC-LOGIN-05: Login gagal tanpa password', async ({ page, loginPage }) => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-05', '01_halaman-login');
 
     await loginPage.login(USERS.STANDARD.username, '');
@@ -78,7 +74,7 @@ test.describe('🔐 Login Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-LOGIN-06', '01_verifikasi-elemen-UI');
   });
 
-  test('TC-LOGIN-07: Login dengan performance_glitch_user', async ({ page }) => {
+  test('TC-LOGIN-07: Login dengan performance_glitch_user', async ({ page, loginPage }) => {
     test.slow();
     await takeScreenshot(page, SUITE, 'TC-LOGIN-07', '01_halaman-login');
 

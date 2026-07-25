@@ -1,5 +1,4 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage, InventoryPage } = require('./pages/saucedemo.pages');
+const { test, expect } = require('./fixtures/test.fixture');
 const { USERS } = require('./data/test-data');
 const { takeScreenshot } = require('./helpers/screenshot.helper');
 
@@ -7,9 +6,7 @@ const SUITE = 'e2e';
 
 test.describe('🔄 End-to-End Tests - Saucedemo', () => {
 
-  test('TC-E2E-01: Full purchase flow - login, add to cart, checkout', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
+  test('TC-E2E-01: Full purchase flow - login, add to cart, checkout', async ({ page, loginPage, inventoryPage }) => {
 
     // Step 1: Login
     await loginPage.goto();
@@ -55,10 +52,7 @@ test.describe('🔄 End-to-End Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-E2E-01', '08_order-complete-sukses');
   });
 
-  test('TC-E2E-02: Login dan Logout', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
-
+  test('TC-E2E-02: Login dan Logout', async ({ page, loginPage, inventoryPage }) => {
     await loginPage.goto();
     await takeScreenshot(page, SUITE, 'TC-E2E-02', '01_halaman-login');
     await loginPage.login(USERS.STANDARD.username, USERS.STANDARD.password);
@@ -77,10 +71,7 @@ test.describe('🔄 End-to-End Tests - Saucedemo', () => {
     await takeScreenshot(page, SUITE, 'TC-E2E-03', '01_redirect-ke-login-tanpa-auth');
   });
 
-  test('TC-E2E-04: Sort dan beli produk termurah', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
-
+  test('TC-E2E-04: Sort dan beli produk termurah', async ({ page, loginPage, inventoryPage }) => {
     await loginPage.goto();
     await loginPage.login(USERS.STANDARD.username, USERS.STANDARD.password);
     await takeScreenshot(page, SUITE, 'TC-E2E-04', '01_inventory-default');
