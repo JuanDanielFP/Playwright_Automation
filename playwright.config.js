@@ -9,10 +9,14 @@ require('dotenv').config();
 module.exports = defineConfig({
   testDir: './tests',
 
+  // Cross-platform snapshot path template (removes -win32 / -linux OS suffix)
+  snapshotPathTemplate: '{testDir}/{testFileName}-snapshots/{arg}-{projectName}{ext}',
+
   // Visual comparison settings
   expect: {
     toHaveScreenshot: {
       maxDiffPixelRatio: 0.05,
+      timeout: 15_000,
     },
   },
 
