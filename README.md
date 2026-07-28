@@ -27,7 +27,8 @@ D:\Playwright\
 │   ├── inventory.test.js       # Test Inventory (10 TC)
 │   ├── cart.test.js            # Test Cart (7 TC)
 │   ├── checkout.test.js        # Test Checkout (8 TC)
-│   └── e2e.test.js             # End-to-End Test (4 TC)
+│   ├── e2e.test.js             # End-to-End Test (4 TC)
+│   └── visual.test.js          # Visual Regression / Snapshot Testing (4 TC)
 └── playwright-report/          # HTML Report (auto-generated)
 ```
 
@@ -55,6 +56,8 @@ npm run test:inventory   # Test inventory saja
 npm run test:cart        # Test cart saja
 npm run test:checkout    # Test checkout saja
 npm run test:e2e         # End-to-end test
+npm run test:visual      # Visual regression test
+npm run test:visual:update # Update baseline snapshots
 ```
 
 ### Jalankan per browser

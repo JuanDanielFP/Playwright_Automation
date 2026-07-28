@@ -9,6 +9,13 @@ require('dotenv').config();
 module.exports = defineConfig({
   testDir: './tests',
 
+  // Visual comparison settings
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.05,
+    },
+  },
+
   // Run tests in parallel
   fullyParallel: true,
 
