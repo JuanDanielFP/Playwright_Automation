@@ -71,9 +71,17 @@ npm run test:debug       # Mode step-by-step debug
 npm run test:ui          # Playwright UI Mode
 ```
 
-### Lihat laporan HTML
+### Lihat laporan (Reporting)
 ```bash
+# Playwright HTML Report
 npm run report
+
+# Allure Report (Generate & buka di browser)
+npm run allure:generate
+npm run allure:open
+
+# Atau buka Allure Report secara instan (Serve Mode)
+npm run allure:serve
 ```
 
 ## 📋 Daftar Test Cases

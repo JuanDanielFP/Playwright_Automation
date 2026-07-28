@@ -24,6 +24,7 @@ module.exports = defineConfig({
   // Reporter to use
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['allure-playwright', { outputFolder: 'allure-results' }],
     ['list'],
   ],
 
