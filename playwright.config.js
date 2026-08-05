@@ -14,9 +14,9 @@ module.exports = defineConfig({
 
   // Visual comparison settings
   expect: {
+    timeout: 15_000,
     toHaveScreenshot: {
       maxDiffPixelRatio: 0.05,
-      timeout: 15_000,
     },
   },
 
