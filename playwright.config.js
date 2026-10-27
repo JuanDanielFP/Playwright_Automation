@@ -1,5 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
+// @ts-ignore
 require('dotenv').config();
 
 /**
